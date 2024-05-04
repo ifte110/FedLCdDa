@@ -1,0 +1,45 @@
+[2024-05-04 19:57:24,897][flwr][INFO] - Starting Flower simulation, config: num_rounds=5, no round_timeout
+[2024-05-04 19:57:41,395][flwr][INFO] - Flower VCE: Ray initialized with resources: {'node:__internal_head__': 1.0, 'object_store_memory': 395597414.0, 'node:127.0.0.1': 1.0, 'memory': 791194830.0, 'CPU': 8.0}
+[2024-05-04 19:57:41,395][flwr][INFO] - Optimize your simulation with Flower VCE: https://flower.ai/docs/framework/how-to-run-simulations.html
+[2024-05-04 19:57:41,395][flwr][INFO] - Flower VCE: Resources for each Virtual Client: {'num_cpus': 1, 'num_gpus': 0.0}
+[2024-05-04 19:57:41,434][flwr][INFO] - Flower VCE: Creating VirtualClientEngineActorPool with 8 actors
+[2024-05-04 19:57:41,434][flwr][INFO] - [INIT]
+[2024-05-04 19:57:41,438][flwr][INFO] - Requesting initial parameters from one random client
+[2024-05-04 19:57:52,159][flwr][INFO] - Received initial parameters from one random client
+[2024-05-04 19:57:52,159][flwr][INFO] - Evaluating initial global parameters
+[2024-05-04 19:57:57,330][flwr][INFO] - initial parameters (loss, other metrics): 182.03767681121826, {'accuracy': 0.1}
+[2024-05-04 19:57:57,332][flwr][INFO] - 
+[2024-05-04 19:57:57,333][flwr][INFO] - [ROUND 1]
+[2024-05-04 19:57:57,334][flwr][INFO] - configure_fit: strategy sampled 5 clients (out of 5)
+[2024-05-04 19:58:37,771][flwr][INFO] - aggregate_fit: received 5 results and 0 failures
+[2024-05-04 19:58:37,797][flwr][WARNING] - No fit_metrics_aggregation_fn provided
+[2024-05-04 19:58:42,799][flwr][INFO] - fit progress: (1, 139.04089617729187, {'accuracy': 0.3512}, 45.46960100000433)
+[2024-05-04 19:58:42,799][flwr][INFO] - configure_evaluate: strategy sampled 5 clients (out of 5)
+[2024-05-04 19:59:04,175][flwr][INFO] - aggregate_evaluate: received 5 results and 0 failures
+[2024-05-04 19:59:04,175][flwr][WARNING] - No evaluate_metrics_aggregation_fn provided
+[2024-05-04 19:59:04,175][flwr][INFO] - 
+[2024-05-04 19:59:04,175][flwr][INFO] - [ROUND 2]
+[2024-05-04 19:59:04,175][flwr][INFO] - configure_fit: strategy sampled 5 clients (out of 5)
+[2024-05-04 19:59:32,279][flwr][INFO] - aggregate_fit: received 5 results and 0 failures
+[2024-05-04 19:59:37,905][flwr][INFO] - fit progress: (2, 123.77297472953796, {'accuracy': 0.4327}, 100.57785210000293)
+[2024-05-04 19:59:37,905][flwr][INFO] - configure_evaluate: strategy sampled 5 clients (out of 5)
+(raylet) [2024-05-04 19:59:48,293 C 1900 11388] (raylet.exe) dlmalloc.cc:129:  Check failed: *handle != nullptr CreateFileMapping() failed. GetLastError() = 1450
+(raylet) *** StackTrace Information ***
+(raylet) unknown
+(raylet)
+(raylet) The node with node id: e4291d0c57ced974954b644c41c3a629ce798fb7cda0d1f2645425b1 and address: 127.0.0.1 and node name: 127.0.0.1 has been marked dead because the detector has missed 
+too many heartbeats from it. This can happen when a     (1) raylet crashes unexpectedly (OOM, preempted node, etc.)
+        (2) raylet has lagging heartbeats due to slow network or busy workload.
+[2024-05-04 20:00:02,436 E 8908 1336] core_worker.cc:631: :info_message: Attempting to recover 1 lost objects by resubmitting their tasks. To disable object reconstruction, set @ray.remote(max_retries=0).
+Exception in thread Thread-14:
+Traceback (most recent call last):
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\threading.py", line 1045, in _bootstrap_inner
+    self.run()
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\threading.py", line 1401, in run
+    self.function(*self.args, **self.kwargs)
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\flwr\simulation\app.py", line 276, in update_resources
+    num_max_actors = pool_size_from_resources(client_resources)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 126, in pool_size_from_resources
+    "The ActorPool is empty. The system (CPUs=%s, GPUs=%s) "
+UnboundLocalError: cannot access local variable 'num_cpus' where it is not associated with a value

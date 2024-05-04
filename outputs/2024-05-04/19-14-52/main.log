@@ -1,0 +1,1102 @@
+[2024-05-04 19:14:54,432][flwr][INFO] - Starting Flower simulation, config: num_rounds=5, no round_timeout
+[2024-05-04 19:15:05,768][flwr][INFO] - Flower VCE: Ray initialized with resources: {'memory': 1185865728.0, 'node:127.0.0.1': 1.0, 'object_store_memory': 592932864.0, 'node:__internal_head__': 1.0, 'CPU': 8.0}
+[2024-05-04 19:15:05,768][flwr][INFO] - Optimize your simulation with Flower VCE: https://flower.ai/docs/framework/how-to-run-simulations.html
+[2024-05-04 19:15:05,768][flwr][INFO] - Flower VCE: Resources for each Virtual Client: {'num_cpus': 1, 'num_gpus': 0.0}
+[2024-05-04 19:15:05,803][flwr][INFO] - Flower VCE: Creating VirtualClientEngineActorPool with 8 actors
+[2024-05-04 19:15:05,803][flwr][INFO] - [INIT]
+[2024-05-04 19:15:05,803][flwr][INFO] - Requesting initial parameters from one random client
+[2024-05-04 19:15:20,773][flwr][INFO] - Received initial parameters from one random client
+[2024-05-04 19:15:20,773][flwr][INFO] - Evaluating initial global parameters
+[2024-05-04 19:15:25,326][flwr][INFO] - initial parameters (loss, other metrics): 182.00684189796448, {'accuracy': 0.1}
+[2024-05-04 19:15:25,326][flwr][INFO] - 
+[2024-05-04 19:15:25,326][flwr][INFO] - [ROUND 1]
+[2024-05-04 19:15:25,326][flwr][INFO] - configure_fit: strategy sampled 5 clients (out of 5)
+[2024-05-04 19:16:29,609][flwr][INFO] - aggregate_fit: received 5 results and 0 failures
+[2024-05-04 19:16:29,618][flwr][WARNING] - No fit_metrics_aggregation_fn provided
+[2024-05-04 19:16:35,028][flwr][INFO] - fit progress: (1, 138.88131165504456, {'accuracy': 0.3666}, 69.69241509999847)
+[2024-05-04 19:16:35,028][flwr][INFO] - configure_evaluate: strategy sampled 5 clients (out of 5)
+[2024-05-04 19:17:05,753][flwr][ERROR] - Traceback (most recent call last):
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\flwr\simulation\ray_transport\ray_client_proxy.py", line 73, in _submit_job
+    out_mssg, updated_context = self.actor_pool.get_client_result(
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 399, in get_client_result
+    return self._fetch_future_result(cid)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 280, in _fetch_future_result
+    res_cid, out_mssg, updated_context = ray.get(
+                                         ^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\ray\_private\auto_init_hook.py", line 21, in auto_init_wrapper
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\ray\_private\client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\ray\_private\worker.py", line 2623, in get
+    values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\ray\_private\worker.py", line 861, in get_objects
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(ClientAppException): [36mray::ClientAppActor.run()[39m (pid=13172, ip=127.0.0.1, actor_id=2c6edf8cf0dcfc8f9c78a02901000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x0000023E2B9B3BD0>)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\flwr\client\client_app.py", line 98, in __call__
+    return self._call(message, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\flwr\client\client_app.py", line 81, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\flwr\client\message_handler\message_handler.py", line 137, in handle_legacy_message_from_msgtype
+    evaluate_res = maybe_call_evaluate(
+                   ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\flwr\client\client.py", line 254, in maybe_call_evaluate
+    return client.evaluate(evaluate_ins)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\flwr\client\numpy_client.py", line 262, in _evaluate
+    results = self.numpy_client.evaluate(parameters, ins.config)  # type: ignore
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\Documents\FedAvgWithDrift\client.py", line 61, in evaluate
+    return float(loss), len(self.valloaders), {'accurcay':accuracy}
+                            ^^^^^^^^^^^^^^^
+AttributeError: 'FlowerClient' object has no attribute 'valloaders'
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=13172, ip=127.0.0.1, actor_id=2c6edf8cf0dcfc8f9c78a02901000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x0000023E2B9B3BD0>)
+  File "python\ray\_raylet.pyx", line 1881, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1982, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1887, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1828, in ray._raylet.execute_task.function_executor
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\ray\_private\function_manager.py", line 691, in actor_method_executor
+    return method(__ray_actor, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\ray\util\tracing\tracing_helper.py", line 467, in _resume_span
+    return method(self, *_args, **_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 64, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: 'FlowerClient' object has no attribute 'valloaders'
+
+[2024-05-04 19:17:05,879][flwr][ERROR] - [36mray::ClientAppActor.run()[39m (pid=13172, ip=127.0.0.1, actor_id=2c6edf8cf0dcfc8f9c78a02901000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x0000023E2B9B3BD0>)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\flwr\client\client_app.py", line 98, in __call__
+    return self._call(message, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\flwr\client\client_app.py", line 81, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\flwr\client\message_handler\message_handler.py", line 137, in handle_legacy_message_from_msgtype
+    evaluate_res = maybe_call_evaluate(
+                   ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\flwr\client\client.py", line 254, in maybe_call_evaluate
+    return client.evaluate(evaluate_ins)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\flwr\client\numpy_client.py", line 262, in _evaluate
+    results = self.numpy_client.evaluate(parameters, ins.config)  # type: ignore
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\Documents\FedAvgWithDrift\client.py", line 61, in evaluate
+    return float(loss), len(self.valloaders), {'accurcay':accuracy}
+                            ^^^^^^^^^^^^^^^
+AttributeError: 'FlowerClient' object has no attribute 'valloaders'
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=13172, ip=127.0.0.1, actor_id=2c6edf8cf0dcfc8f9c78a02901000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x0000023E2B9B3BD0>)
+  File "python\ray\_raylet.pyx", line 1881, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1982, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1887, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1828, in ray._raylet.execute_task.function_executor
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\ray\_private\function_manager.py", line 691, in actor_method_executor
+    return method(__ray_actor, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\ray\util\tracing\tracing_helper.py", line 467, in _resume_span
+    return method(self, *_args, **_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 64, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: 'FlowerClient' object has no attribute 'valloaders'
+[2024-05-04 19:17:09,219][flwr][ERROR] - Traceback (most recent call last):
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\flwr\simulation\ray_transport\ray_client_proxy.py", line 73, in _submit_job
+    out_mssg, updated_context = self.actor_pool.get_client_result(
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 399, in get_client_result
+    return self._fetch_future_result(cid)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 280, in _fetch_future_result
+    res_cid, out_mssg, updated_context = ray.get(
+                                         ^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\ray\_private\auto_init_hook.py", line 21, in auto_init_wrapper
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\ray\_private\client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\ray\_private\worker.py", line 2623, in get
+    values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\ray\_private\worker.py", line 861, in get_objects
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(ClientAppException): [36mray::ClientAppActor.run()[39m (pid=9092, ip=127.0.0.1, actor_id=9a05a2eadcaae9ca32fa7da201000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x000002B844966F90>)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\flwr\client\client_app.py", line 98, in __call__
+    return self._call(message, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\flwr\client\client_app.py", line 81, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\flwr\client\message_handler\message_handler.py", line 137, in handle_legacy_message_from_msgtype
+    evaluate_res = maybe_call_evaluate(
+                   ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\flwr\client\client.py", line 254, in maybe_call_evaluate
+    return client.evaluate(evaluate_ins)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\flwr\client\numpy_client.py", line 262, in _evaluate
+    results = self.numpy_client.evaluate(parameters, ins.config)  # type: ignore
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\Documents\FedAvgWithDrift\client.py", line 61, in evaluate
+    return float(loss), len(self.valloaders), {'accurcay':accuracy}
+                            ^^^^^^^^^^^^^^^
+AttributeError: 'FlowerClient' object has no attribute 'valloaders'
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=9092, ip=127.0.0.1, actor_id=9a05a2eadcaae9ca32fa7da201000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x000002B844966F90>)
+  File "python\ray\_raylet.pyx", line 1881, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1982, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1887, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1828, in ray._raylet.execute_task.function_executor
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\ray\_private\function_manager.py", line 691, in actor_method_executor
+    return method(__ray_actor, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\ray\util\tracing\tracing_helper.py", line 467, in _resume_span
+    return method(self, *_args, **_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 64, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: 'FlowerClient' object has no attribute 'valloaders'
+
+[2024-05-04 19:17:09,248][flwr][ERROR] - [36mray::ClientAppActor.run()[39m (pid=9092, ip=127.0.0.1, actor_id=9a05a2eadcaae9ca32fa7da201000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x000002B844966F90>)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\flwr\client\client_app.py", line 98, in __call__
+    return self._call(message, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\flwr\client\client_app.py", line 81, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\flwr\client\message_handler\message_handler.py", line 137, in handle_legacy_message_from_msgtype
+    evaluate_res = maybe_call_evaluate(
+                   ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\flwr\client\client.py", line 254, in maybe_call_evaluate
+    return client.evaluate(evaluate_ins)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\flwr\client\numpy_client.py", line 262, in _evaluate
+    results = self.numpy_client.evaluate(parameters, ins.config)  # type: ignore
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\Documents\FedAvgWithDrift\client.py", line 61, in evaluate
+    return float(loss), len(self.valloaders), {'accurcay':accuracy}
+                            ^^^^^^^^^^^^^^^
+AttributeError: 'FlowerClient' object has no attribute 'valloaders'
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=9092, ip=127.0.0.1, actor_id=9a05a2eadcaae9ca32fa7da201000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x000002B844966F90>)
+  File "python\ray\_raylet.pyx", line 1881, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1982, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1887, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1828, in ray._raylet.execute_task.function_executor
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\ray\_private\function_manager.py", line 691, in actor_method_executor
+    return method(__ray_actor, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\ray\util\tracing\tracing_helper.py", line 467, in _resume_span
+    return method(self, *_args, **_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 64, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: 'FlowerClient' object has no attribute 'valloaders'
+[2024-05-04 19:17:16,591][flwr][ERROR] - Traceback (most recent call last):
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\flwr\simulation\ray_transport\ray_client_proxy.py", line 73, in _submit_job
+    out_mssg, updated_context = self.actor_pool.get_client_result(
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 399, in get_client_result
+    return self._fetch_future_result(cid)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 280, in _fetch_future_result
+    res_cid, out_mssg, updated_context = ray.get(
+                                         ^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\ray\_private\auto_init_hook.py", line 21, in auto_init_wrapper
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\ray\_private\client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\ray\_private\worker.py", line 2623, in get
+    values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\ray\_private\worker.py", line 861, in get_objects
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(ClientAppException): [36mray::ClientAppActor.run()[39m (pid=1804, ip=127.0.0.1, actor_id=74ef4a3faba1221e9be9e28b01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x000002986F490410>)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\flwr\client\client_app.py", line 98, in __call__
+    return self._call(message, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\flwr\client\client_app.py", line 81, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\flwr\client\message_handler\message_handler.py", line 137, in handle_legacy_message_from_msgtype
+    evaluate_res = maybe_call_evaluate(
+                   ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\flwr\client\client.py", line 254, in maybe_call_evaluate
+    return client.evaluate(evaluate_ins)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\flwr\client\numpy_client.py", line 262, in _evaluate
+    results = self.numpy_client.evaluate(parameters, ins.config)  # type: ignore
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\Documents\FedAvgWithDrift\client.py", line 61, in evaluate
+    return float(loss), len(self.valloaders), {'accurcay':accuracy}
+                            ^^^^^^^^^^^^^^^
+AttributeError: 'FlowerClient' object has no attribute 'valloaders'
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=1804, ip=127.0.0.1, actor_id=74ef4a3faba1221e9be9e28b01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x000002986F490410>)
+  File "python\ray\_raylet.pyx", line 1881, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1982, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1887, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1828, in ray._raylet.execute_task.function_executor
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\ray\_private\function_manager.py", line 691, in actor_method_executor
+    return method(__ray_actor, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\ray\util\tracing\tracing_helper.py", line 467, in _resume_span
+    return method(self, *_args, **_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 64, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: 'FlowerClient' object has no attribute 'valloaders'
+
+[2024-05-04 19:17:16,638][flwr][ERROR] - [36mray::ClientAppActor.run()[39m (pid=1804, ip=127.0.0.1, actor_id=74ef4a3faba1221e9be9e28b01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x000002986F490410>)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\flwr\client\client_app.py", line 98, in __call__
+    return self._call(message, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\flwr\client\client_app.py", line 81, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\flwr\client\message_handler\message_handler.py", line 137, in handle_legacy_message_from_msgtype
+    evaluate_res = maybe_call_evaluate(
+                   ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\flwr\client\client.py", line 254, in maybe_call_evaluate
+    return client.evaluate(evaluate_ins)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\flwr\client\numpy_client.py", line 262, in _evaluate
+    results = self.numpy_client.evaluate(parameters, ins.config)  # type: ignore
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\Documents\FedAvgWithDrift\client.py", line 61, in evaluate
+    return float(loss), len(self.valloaders), {'accurcay':accuracy}
+                            ^^^^^^^^^^^^^^^
+AttributeError: 'FlowerClient' object has no attribute 'valloaders'
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=1804, ip=127.0.0.1, actor_id=74ef4a3faba1221e9be9e28b01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x000002986F490410>)
+  File "python\ray\_raylet.pyx", line 1881, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1982, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1887, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1828, in ray._raylet.execute_task.function_executor
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\ray\_private\function_manager.py", line 691, in actor_method_executor
+    return method(__ray_actor, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\ray\util\tracing\tracing_helper.py", line 467, in _resume_span
+    return method(self, *_args, **_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 64, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: 'FlowerClient' object has no attribute 'valloaders'
+[2024-05-04 19:17:17,799][flwr][ERROR] - Traceback (most recent call last):
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\flwr\simulation\ray_transport\ray_client_proxy.py", line 73, in _submit_job
+    out_mssg, updated_context = self.actor_pool.get_client_result(
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 399, in get_client_result
+    return self._fetch_future_result(cid)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 280, in _fetch_future_result
+    res_cid, out_mssg, updated_context = ray.get(
+                                         ^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\ray\_private\auto_init_hook.py", line 21, in auto_init_wrapper
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\ray\_private\client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\ray\_private\worker.py", line 2623, in get
+    values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\ray\_private\worker.py", line 861, in get_objects
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(ClientAppException): [36mray::ClientAppActor.run()[39m (pid=4100, ip=127.0.0.1, actor_id=cc664672e2470a2a1f91952a01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x00000104ECF151D0>)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\flwr\client\client_app.py", line 98, in __call__
+    return self._call(message, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\flwr\client\client_app.py", line 81, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\flwr\client\message_handler\message_handler.py", line 137, in handle_legacy_message_from_msgtype
+    evaluate_res = maybe_call_evaluate(
+                   ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\flwr\client\client.py", line 254, in maybe_call_evaluate
+    return client.evaluate(evaluate_ins)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\flwr\client\numpy_client.py", line 262, in _evaluate
+    results = self.numpy_client.evaluate(parameters, ins.config)  # type: ignore
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\Documents\FedAvgWithDrift\client.py", line 61, in evaluate
+    return float(loss), len(self.valloaders), {'accurcay':accuracy}
+                            ^^^^^^^^^^^^^^^
+AttributeError: 'FlowerClient' object has no attribute 'valloaders'
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=4100, ip=127.0.0.1, actor_id=cc664672e2470a2a1f91952a01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x00000104ECF151D0>)
+  File "python\ray\_raylet.pyx", line 1881, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1982, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1887, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1828, in ray._raylet.execute_task.function_executor
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\ray\_private\function_manager.py", line 691, in actor_method_executor
+    return method(__ray_actor, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\ray\util\tracing\tracing_helper.py", line 467, in _resume_span
+    return method(self, *_args, **_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 64, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: 'FlowerClient' object has no attribute 'valloaders'
+
+[2024-05-04 19:17:17,832][flwr][ERROR] - [36mray::ClientAppActor.run()[39m (pid=4100, ip=127.0.0.1, actor_id=cc664672e2470a2a1f91952a01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x00000104ECF151D0>)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\flwr\client\client_app.py", line 98, in __call__
+    return self._call(message, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\flwr\client\client_app.py", line 81, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\flwr\client\message_handler\message_handler.py", line 137, in handle_legacy_message_from_msgtype
+    evaluate_res = maybe_call_evaluate(
+                   ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\flwr\client\client.py", line 254, in maybe_call_evaluate
+    return client.evaluate(evaluate_ins)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\flwr\client\numpy_client.py", line 262, in _evaluate
+    results = self.numpy_client.evaluate(parameters, ins.config)  # type: ignore
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\Documents\FedAvgWithDrift\client.py", line 61, in evaluate
+    return float(loss), len(self.valloaders), {'accurcay':accuracy}
+                            ^^^^^^^^^^^^^^^
+AttributeError: 'FlowerClient' object has no attribute 'valloaders'
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=4100, ip=127.0.0.1, actor_id=cc664672e2470a2a1f91952a01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x00000104ECF151D0>)
+  File "python\ray\_raylet.pyx", line 1881, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1982, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1887, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1828, in ray._raylet.execute_task.function_executor
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\ray\_private\function_manager.py", line 691, in actor_method_executor
+    return method(__ray_actor, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\ray\util\tracing\tracing_helper.py", line 467, in _resume_span
+    return method(self, *_args, **_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 64, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: 'FlowerClient' object has no attribute 'valloaders'
+[2024-05-04 19:17:22,290][flwr][ERROR] - Traceback (most recent call last):
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\flwr\simulation\ray_transport\ray_client_proxy.py", line 73, in _submit_job
+    out_mssg, updated_context = self.actor_pool.get_client_result(
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 399, in get_client_result
+    return self._fetch_future_result(cid)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 280, in _fetch_future_result
+    res_cid, out_mssg, updated_context = ray.get(
+                                         ^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\ray\_private\auto_init_hook.py", line 21, in auto_init_wrapper
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\ray\_private\client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\ray\_private\worker.py", line 2623, in get
+    values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\ray\_private\worker.py", line 861, in get_objects
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(ClientAppException): [36mray::ClientAppActor.run()[39m (pid=3404, ip=127.0.0.1, actor_id=252af0c7c28172b67162e42201000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x000001B06C5BFA10>)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\flwr\client\client_app.py", line 98, in __call__
+    return self._call(message, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\flwr\client\client_app.py", line 81, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\flwr\client\message_handler\message_handler.py", line 137, in handle_legacy_message_from_msgtype
+    evaluate_res = maybe_call_evaluate(
+                   ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\flwr\client\client.py", line 254, in maybe_call_evaluate
+    return client.evaluate(evaluate_ins)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\flwr\client\numpy_client.py", line 262, in _evaluate
+    results = self.numpy_client.evaluate(parameters, ins.config)  # type: ignore
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\Documents\FedAvgWithDrift\client.py", line 61, in evaluate
+    return float(loss), len(self.valloaders), {'accurcay':accuracy}
+                            ^^^^^^^^^^^^^^^
+AttributeError: 'FlowerClient' object has no attribute 'valloaders'
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=3404, ip=127.0.0.1, actor_id=252af0c7c28172b67162e42201000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x000001B06C5BFA10>)
+  File "python\ray\_raylet.pyx", line 1881, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1982, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1887, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1828, in ray._raylet.execute_task.function_executor
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\ray\_private\function_manager.py", line 691, in actor_method_executor
+    return method(__ray_actor, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\ray\util\tracing\tracing_helper.py", line 467, in _resume_span
+    return method(self, *_args, **_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 64, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: 'FlowerClient' object has no attribute 'valloaders'
+
+[2024-05-04 19:17:22,310][flwr][ERROR] - [36mray::ClientAppActor.run()[39m (pid=3404, ip=127.0.0.1, actor_id=252af0c7c28172b67162e42201000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x000001B06C5BFA10>)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\flwr\client\client_app.py", line 98, in __call__
+    return self._call(message, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\flwr\client\client_app.py", line 81, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\flwr\client\message_handler\message_handler.py", line 137, in handle_legacy_message_from_msgtype
+    evaluate_res = maybe_call_evaluate(
+                   ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\flwr\client\client.py", line 254, in maybe_call_evaluate
+    return client.evaluate(evaluate_ins)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\flwr\client\numpy_client.py", line 262, in _evaluate
+    results = self.numpy_client.evaluate(parameters, ins.config)  # type: ignore
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\Documents\FedAvgWithDrift\client.py", line 61, in evaluate
+    return float(loss), len(self.valloaders), {'accurcay':accuracy}
+                            ^^^^^^^^^^^^^^^
+AttributeError: 'FlowerClient' object has no attribute 'valloaders'
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=3404, ip=127.0.0.1, actor_id=252af0c7c28172b67162e42201000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x000001B06C5BFA10>)
+  File "python\ray\_raylet.pyx", line 1881, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1982, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1887, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1828, in ray._raylet.execute_task.function_executor
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\ray\_private\function_manager.py", line 691, in actor_method_executor
+    return method(__ray_actor, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\ray\util\tracing\tracing_helper.py", line 467, in _resume_span
+    return method(self, *_args, **_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 64, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: 'FlowerClient' object has no attribute 'valloaders'
+[2024-05-04 19:17:22,321][flwr][INFO] - aggregate_evaluate: received 0 results and 5 failures
+[2024-05-04 19:17:22,321][flwr][INFO] - 
+[2024-05-04 19:17:22,321][flwr][INFO] - [ROUND 2]
+[2024-05-04 19:17:22,321][flwr][INFO] - configure_fit: strategy sampled 5 clients (out of 5)
+[2024-05-04 19:18:36,865][flwr][INFO] - aggregate_fit: received 5 results and 0 failures
+[2024-05-04 19:18:42,304][flwr][INFO] - fit progress: (2, 119.50984060764313, {'accuracy': 0.4538}, 196.96407979998912)
+[2024-05-04 19:18:42,305][flwr][INFO] - configure_evaluate: strategy sampled 5 clients (out of 5)
+[2024-05-04 19:19:05,226][flwr][ERROR] - Traceback (most recent call last):
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\flwr\simulation\ray_transport\ray_client_proxy.py", line 73, in _submit_job
+    out_mssg, updated_context = self.actor_pool.get_client_result(
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 399, in get_client_result
+    return self._fetch_future_result(cid)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 280, in _fetch_future_result
+    res_cid, out_mssg, updated_context = ray.get(
+                                         ^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\ray\_private\auto_init_hook.py", line 21, in auto_init_wrapper
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\ray\_private\client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\ray\_private\worker.py", line 2623, in get
+    values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\ray\_private\worker.py", line 861, in get_objects
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(ClientAppException): [36mray::ClientAppActor.run()[39m (pid=4100, ip=127.0.0.1, actor_id=cc664672e2470a2a1f91952a01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x00000104ECF151D0>)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\flwr\client\client_app.py", line 98, in __call__
+    return self._call(message, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\flwr\client\client_app.py", line 81, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\flwr\client\message_handler\message_handler.py", line 137, in handle_legacy_message_from_msgtype
+    evaluate_res = maybe_call_evaluate(
+                   ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\flwr\client\client.py", line 254, in maybe_call_evaluate
+    return client.evaluate(evaluate_ins)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\flwr\client\numpy_client.py", line 262, in _evaluate
+    results = self.numpy_client.evaluate(parameters, ins.config)  # type: ignore
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\Documents\FedAvgWithDrift\client.py", line 59, in evaluate
+    loss, accuracy =  test(self.model, self.valloader, self.device)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\Documents\FedAvgWithDrift\model.py", line 50, in test
+    for data in testloader:
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\torch\utils\data\dataloader.py", line 439, in __iter__
+    return self._get_iterator()
+           ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\torch\utils\data\dataloader.py", line 387, in _get_iterator
+    return _MultiProcessingDataLoaderIter(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\torch\utils\data\dataloader.py", line 1040, in __init__
+    w.start()
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\multiprocessing\process.py", line 121, in start
+    self._popen = self._Popen(self)
+                  ^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\multiprocessing\context.py", line 224, in _Popen
+    return _default_context.get_context().Process._Popen(process_obj)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\multiprocessing\context.py", line 336, in _Popen
+    return Popen(process_obj)
+           ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\multiprocessing\popen_spawn_win32.py", line 95, in __init__
+    reduction.dump(process_obj, to_child)
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\multiprocessing\reduction.py", line 60, in dump
+    ForkingPickler(file, protocol).dump(obj)
+OSError: [Errno 22] Invalid argument
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=4100, ip=127.0.0.1, actor_id=cc664672e2470a2a1f91952a01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x00000104ECF151D0>)
+  File "python\ray\_raylet.pyx", line 1881, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1982, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1887, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1828, in ray._raylet.execute_task.function_executor
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\ray\_private\function_manager.py", line 691, in actor_method_executor
+    return method(__ray_actor, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\ray\util\tracing\tracing_helper.py", line 467, in _resume_span
+    return method(self, *_args, **_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 64, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: [Errno 22] Invalid argument
+
+[2024-05-04 19:19:05,357][flwr][ERROR] - [36mray::ClientAppActor.run()[39m (pid=4100, ip=127.0.0.1, actor_id=cc664672e2470a2a1f91952a01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x00000104ECF151D0>)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\flwr\client\client_app.py", line 98, in __call__
+    return self._call(message, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\flwr\client\client_app.py", line 81, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\flwr\client\message_handler\message_handler.py", line 137, in handle_legacy_message_from_msgtype
+    evaluate_res = maybe_call_evaluate(
+                   ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\flwr\client\client.py", line 254, in maybe_call_evaluate
+    return client.evaluate(evaluate_ins)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\flwr\client\numpy_client.py", line 262, in _evaluate
+    results = self.numpy_client.evaluate(parameters, ins.config)  # type: ignore
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\Documents\FedAvgWithDrift\client.py", line 59, in evaluate
+    loss, accuracy =  test(self.model, self.valloader, self.device)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\Documents\FedAvgWithDrift\model.py", line 50, in test
+    for data in testloader:
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\torch\utils\data\dataloader.py", line 439, in __iter__
+    return self._get_iterator()
+           ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\torch\utils\data\dataloader.py", line 387, in _get_iterator
+    return _MultiProcessingDataLoaderIter(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\torch\utils\data\dataloader.py", line 1040, in __init__
+    w.start()
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\multiprocessing\process.py", line 121, in start
+    self._popen = self._Popen(self)
+                  ^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\multiprocessing\context.py", line 224, in _Popen
+    return _default_context.get_context().Process._Popen(process_obj)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\multiprocessing\context.py", line 336, in _Popen
+    return Popen(process_obj)
+           ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\multiprocessing\popen_spawn_win32.py", line 95, in __init__
+    reduction.dump(process_obj, to_child)
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\multiprocessing\reduction.py", line 60, in dump
+    ForkingPickler(file, protocol).dump(obj)
+OSError: [Errno 22] Invalid argument
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=4100, ip=127.0.0.1, actor_id=cc664672e2470a2a1f91952a01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x00000104ECF151D0>)
+  File "python\ray\_raylet.pyx", line 1881, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1982, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1887, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1828, in ray._raylet.execute_task.function_executor
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\ray\_private\function_manager.py", line 691, in actor_method_executor
+    return method(__ray_actor, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\ray\util\tracing\tracing_helper.py", line 467, in _resume_span
+    return method(self, *_args, **_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 64, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: [Errno 22] Invalid argument
+[2024-05-04 19:19:11,927][flwr][ERROR] - Traceback (most recent call last):
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\flwr\simulation\ray_transport\ray_client_proxy.py", line 73, in _submit_job
+    out_mssg, updated_context = self.actor_pool.get_client_result(
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 399, in get_client_result
+    return self._fetch_future_result(cid)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 280, in _fetch_future_result
+    res_cid, out_mssg, updated_context = ray.get(
+                                         ^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\ray\_private\auto_init_hook.py", line 21, in auto_init_wrapper
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\ray\_private\client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\ray\_private\worker.py", line 2623, in get
+    values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\ray\_private\worker.py", line 861, in get_objects
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(ClientAppException): [36mray::ClientAppActor.run()[39m (pid=13172, ip=127.0.0.1, actor_id=2c6edf8cf0dcfc8f9c78a02901000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x0000023E2B9B3BD0>)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\flwr\client\client_app.py", line 98, in __call__
+    return self._call(message, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\flwr\client\client_app.py", line 81, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\flwr\client\message_handler\message_handler.py", line 137, in handle_legacy_message_from_msgtype
+    evaluate_res = maybe_call_evaluate(
+                   ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\flwr\client\client.py", line 254, in maybe_call_evaluate
+    return client.evaluate(evaluate_ins)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\flwr\client\numpy_client.py", line 262, in _evaluate
+    results = self.numpy_client.evaluate(parameters, ins.config)  # type: ignore
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\Documents\FedAvgWithDrift\client.py", line 61, in evaluate
+    return float(loss), len(self.valloader), {'accurcay':accuracy}
+                            ^^^^^^^^^^^^^^^
+AttributeError: 'FlowerClient' object has no attribute 'valloaders'
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=13172, ip=127.0.0.1, actor_id=2c6edf8cf0dcfc8f9c78a02901000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x0000023E2B9B3BD0>)
+  File "python\ray\_raylet.pyx", line 1881, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1982, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1887, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1828, in ray._raylet.execute_task.function_executor
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\ray\_private\function_manager.py", line 691, in actor_method_executor
+    return method(__ray_actor, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\ray\util\tracing\tracing_helper.py", line 467, in _resume_span
+    return method(self, *_args, **_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 64, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: 'FlowerClient' object has no attribute 'valloaders'
+
+[2024-05-04 19:19:11,985][flwr][ERROR] - [36mray::ClientAppActor.run()[39m (pid=13172, ip=127.0.0.1, actor_id=2c6edf8cf0dcfc8f9c78a02901000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x0000023E2B9B3BD0>)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\flwr\client\client_app.py", line 98, in __call__
+    return self._call(message, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\flwr\client\client_app.py", line 81, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\flwr\client\message_handler\message_handler.py", line 137, in handle_legacy_message_from_msgtype
+    evaluate_res = maybe_call_evaluate(
+                   ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\flwr\client\client.py", line 254, in maybe_call_evaluate
+    return client.evaluate(evaluate_ins)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\flwr\client\numpy_client.py", line 262, in _evaluate
+    results = self.numpy_client.evaluate(parameters, ins.config)  # type: ignore
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\Documents\FedAvgWithDrift\client.py", line 61, in evaluate
+    return float(loss), len(self.valloader), {'accurcay':accuracy}
+                            ^^^^^^^^^^^^^^^
+AttributeError: 'FlowerClient' object has no attribute 'valloaders'
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=13172, ip=127.0.0.1, actor_id=2c6edf8cf0dcfc8f9c78a02901000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x0000023E2B9B3BD0>)
+  File "python\ray\_raylet.pyx", line 1881, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1982, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1887, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1828, in ray._raylet.execute_task.function_executor
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\ray\_private\function_manager.py", line 691, in actor_method_executor
+    return method(__ray_actor, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\ray\util\tracing\tracing_helper.py", line 467, in _resume_span
+    return method(self, *_args, **_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 64, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: 'FlowerClient' object has no attribute 'valloaders'
+[2024-05-04 19:19:16,085][flwr][ERROR] - Traceback (most recent call last):
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\flwr\simulation\ray_transport\ray_client_proxy.py", line 73, in _submit_job
+    out_mssg, updated_context = self.actor_pool.get_client_result(
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 399, in get_client_result
+    return self._fetch_future_result(cid)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 280, in _fetch_future_result
+    res_cid, out_mssg, updated_context = ray.get(
+                                         ^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\ray\_private\auto_init_hook.py", line 21, in auto_init_wrapper
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\ray\_private\client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\ray\_private\worker.py", line 2623, in get
+    values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\ray\_private\worker.py", line 861, in get_objects
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(ClientAppException): [36mray::ClientAppActor.run()[39m (pid=1804, ip=127.0.0.1, actor_id=74ef4a3faba1221e9be9e28b01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x000002986F490410>)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\flwr\client\client_app.py", line 98, in __call__
+    return self._call(message, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\flwr\client\client_app.py", line 81, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\flwr\client\message_handler\message_handler.py", line 137, in handle_legacy_message_from_msgtype
+    evaluate_res = maybe_call_evaluate(
+                   ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\flwr\client\client.py", line 254, in maybe_call_evaluate
+    return client.evaluate(evaluate_ins)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\flwr\client\numpy_client.py", line 262, in _evaluate
+    results = self.numpy_client.evaluate(parameters, ins.config)  # type: ignore
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\Documents\FedAvgWithDrift\client.py", line 61, in evaluate
+    return float(loss), len(self.valloader), {'accurcay':accuracy}
+                            ^^^^^^^^^^^^^^^
+AttributeError: 'FlowerClient' object has no attribute 'valloaders'
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=1804, ip=127.0.0.1, actor_id=74ef4a3faba1221e9be9e28b01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x000002986F490410>)
+  File "python\ray\_raylet.pyx", line 1881, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1982, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1887, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1828, in ray._raylet.execute_task.function_executor
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\ray\_private\function_manager.py", line 691, in actor_method_executor
+    return method(__ray_actor, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\ray\util\tracing\tracing_helper.py", line 467, in _resume_span
+    return method(self, *_args, **_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 64, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: 'FlowerClient' object has no attribute 'valloaders'
+
+[2024-05-04 19:19:16,115][flwr][ERROR] - [36mray::ClientAppActor.run()[39m (pid=1804, ip=127.0.0.1, actor_id=74ef4a3faba1221e9be9e28b01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x000002986F490410>)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\flwr\client\client_app.py", line 98, in __call__
+    return self._call(message, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\flwr\client\client_app.py", line 81, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\flwr\client\message_handler\message_handler.py", line 137, in handle_legacy_message_from_msgtype
+    evaluate_res = maybe_call_evaluate(
+                   ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\flwr\client\client.py", line 254, in maybe_call_evaluate
+    return client.evaluate(evaluate_ins)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\flwr\client\numpy_client.py", line 262, in _evaluate
+    results = self.numpy_client.evaluate(parameters, ins.config)  # type: ignore
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\Documents\FedAvgWithDrift\client.py", line 61, in evaluate
+    return float(loss), len(self.valloader), {'accurcay':accuracy}
+                            ^^^^^^^^^^^^^^^
+AttributeError: 'FlowerClient' object has no attribute 'valloaders'
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=1804, ip=127.0.0.1, actor_id=74ef4a3faba1221e9be9e28b01000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x000002986F490410>)
+  File "python\ray\_raylet.pyx", line 1881, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1982, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1887, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1828, in ray._raylet.execute_task.function_executor
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\ray\_private\function_manager.py", line 691, in actor_method_executor
+    return method(__ray_actor, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\ray\util\tracing\tracing_helper.py", line 467, in _resume_span
+    return method(self, *_args, **_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 64, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: 'FlowerClient' object has no attribute 'valloaders'
+[2024-05-04 19:19:20,887][flwr][ERROR] - Traceback (most recent call last):
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\flwr\simulation\ray_transport\ray_client_proxy.py", line 73, in _submit_job
+    out_mssg, updated_context = self.actor_pool.get_client_result(
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 399, in get_client_result
+    return self._fetch_future_result(cid)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 280, in _fetch_future_result
+    res_cid, out_mssg, updated_context = ray.get(
+                                         ^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\ray\_private\auto_init_hook.py", line 21, in auto_init_wrapper
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\ray\_private\client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\ray\_private\worker.py", line 2623, in get
+    values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\ray\_private\worker.py", line 861, in get_objects
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(ClientAppException): [36mray::ClientAppActor.run()[39m (pid=9092, ip=127.0.0.1, actor_id=9a05a2eadcaae9ca32fa7da201000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x000002B844966F90>)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\flwr\client\client_app.py", line 98, in __call__
+    return self._call(message, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\flwr\client\client_app.py", line 81, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\flwr\client\message_handler\message_handler.py", line 137, in handle_legacy_message_from_msgtype
+    evaluate_res = maybe_call_evaluate(
+                   ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\flwr\client\client.py", line 254, in maybe_call_evaluate
+    return client.evaluate(evaluate_ins)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\flwr\client\numpy_client.py", line 262, in _evaluate
+    results = self.numpy_client.evaluate(parameters, ins.config)  # type: ignore
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\Documents\FedAvgWithDrift\client.py", line 61, in evaluate
+    return float(loss), len(self.valloader), {'accurcay':accuracy}
+                            ^^^^^^^^^^^^^^^
+AttributeError: 'FlowerClient' object has no attribute 'valloaders'
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=9092, ip=127.0.0.1, actor_id=9a05a2eadcaae9ca32fa7da201000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x000002B844966F90>)
+  File "python\ray\_raylet.pyx", line 1881, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1982, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1887, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1828, in ray._raylet.execute_task.function_executor
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\ray\_private\function_manager.py", line 691, in actor_method_executor
+    return method(__ray_actor, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\ray\util\tracing\tracing_helper.py", line 467, in _resume_span
+    return method(self, *_args, **_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 64, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: 'FlowerClient' object has no attribute 'valloaders'
+
+[2024-05-04 19:19:20,917][flwr][ERROR] - [36mray::ClientAppActor.run()[39m (pid=9092, ip=127.0.0.1, actor_id=9a05a2eadcaae9ca32fa7da201000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x000002B844966F90>)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\flwr\client\client_app.py", line 98, in __call__
+    return self._call(message, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\flwr\client\client_app.py", line 81, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\flwr\client\message_handler\message_handler.py", line 137, in handle_legacy_message_from_msgtype
+    evaluate_res = maybe_call_evaluate(
+                   ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\flwr\client\client.py", line 254, in maybe_call_evaluate
+    return client.evaluate(evaluate_ins)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\flwr\client\numpy_client.py", line 262, in _evaluate
+    results = self.numpy_client.evaluate(parameters, ins.config)  # type: ignore
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\Documents\FedAvgWithDrift\client.py", line 61, in evaluate
+    return float(loss), len(self.valloader), {'accurcay':accuracy}
+                            ^^^^^^^^^^^^^^^
+AttributeError: 'FlowerClient' object has no attribute 'valloaders'
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=9092, ip=127.0.0.1, actor_id=9a05a2eadcaae9ca32fa7da201000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x000002B844966F90>)
+  File "python\ray\_raylet.pyx", line 1881, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1982, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1887, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1828, in ray._raylet.execute_task.function_executor
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\ray\_private\function_manager.py", line 691, in actor_method_executor
+    return method(__ray_actor, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\ray\util\tracing\tracing_helper.py", line 467, in _resume_span
+    return method(self, *_args, **_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 64, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: 'FlowerClient' object has no attribute 'valloaders'
+[2024-05-04 19:19:25,144][flwr][ERROR] - Traceback (most recent call last):
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\flwr\simulation\ray_transport\ray_client_proxy.py", line 73, in _submit_job
+    out_mssg, updated_context = self.actor_pool.get_client_result(
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 399, in get_client_result
+    return self._fetch_future_result(cid)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 280, in _fetch_future_result
+    res_cid, out_mssg, updated_context = ray.get(
+                                         ^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\ray\_private\auto_init_hook.py", line 21, in auto_init_wrapper
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\ray\_private\client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\ray\_private\worker.py", line 2623, in get
+    values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\ray\_private\worker.py", line 861, in get_objects
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(ClientAppException): [36mray::ClientAppActor.run()[39m (pid=3404, ip=127.0.0.1, actor_id=252af0c7c28172b67162e42201000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x000001B06C5BFA10>)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\flwr\client\client_app.py", line 98, in __call__
+    return self._call(message, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\flwr\client\client_app.py", line 81, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\flwr\client\message_handler\message_handler.py", line 137, in handle_legacy_message_from_msgtype
+    evaluate_res = maybe_call_evaluate(
+                   ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\flwr\client\client.py", line 254, in maybe_call_evaluate
+    return client.evaluate(evaluate_ins)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\flwr\client\numpy_client.py", line 262, in _evaluate
+    results = self.numpy_client.evaluate(parameters, ins.config)  # type: ignore
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\Documents\FedAvgWithDrift\client.py", line 61, in evaluate
+    return float(loss), len(self.valloader), {'accurcay':accuracy}
+                            ^^^^^^^^^^^^^^^
+AttributeError: 'FlowerClient' object has no attribute 'valloaders'
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=3404, ip=127.0.0.1, actor_id=252af0c7c28172b67162e42201000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x000001B06C5BFA10>)
+  File "python\ray\_raylet.pyx", line 1881, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1982, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1887, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1828, in ray._raylet.execute_task.function_executor
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\ray\_private\function_manager.py", line 691, in actor_method_executor
+    return method(__ray_actor, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\ray\util\tracing\tracing_helper.py", line 467, in _resume_span
+    return method(self, *_args, **_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 64, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: 'FlowerClient' object has no attribute 'valloaders'
+
+[2024-05-04 19:19:25,166][flwr][ERROR] - [36mray::ClientAppActor.run()[39m (pid=3404, ip=127.0.0.1, actor_id=252af0c7c28172b67162e42201000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x000001B06C5BFA10>)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\flwr\client\client_app.py", line 98, in __call__
+    return self._call(message, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\flwr\client\client_app.py", line 81, in ffn
+    out_message = handle_legacy_message_from_msgtype(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\flwr\client\message_handler\message_handler.py", line 137, in handle_legacy_message_from_msgtype
+    evaluate_res = maybe_call_evaluate(
+                   ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\flwr\client\client.py", line 254, in maybe_call_evaluate
+    return client.evaluate(evaluate_ins)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\flwr\client\numpy_client.py", line 262, in _evaluate
+    results = self.numpy_client.evaluate(parameters, ins.config)  # type: ignore
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\Documents\FedAvgWithDrift\client.py", line 61, in evaluate
+    return float(loss), len(self.valloader), {'accurcay':accuracy}
+                            ^^^^^^^^^^^^^^^
+AttributeError: 'FlowerClient' object has no attribute 'valloaders'
+
+The above exception was the direct cause of the following exception:
+
+[36mray::ClientAppActor.run()[39m (pid=3404, ip=127.0.0.1, actor_id=252af0c7c28172b67162e42201000000, repr=<flwr.simulation.ray_transport.ray_actor.ClientAppActor object at 0x000001B06C5BFA10>)
+  File "python\ray\_raylet.pyx", line 1881, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1982, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1887, in ray._raylet.execute_task
+  File "python\ray\_raylet.pyx", line 1828, in ray._raylet.execute_task.function_executor
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\ray\_private\function_manager.py", line 691, in actor_method_executor
+    return method(__ray_actor, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\ray\util\tracing\tracing_helper.py", line 467, in _resume_span
+    return method(self, *_args, **_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 64, in run
+    raise ClientAppException(str(ex)) from ex
+flwr.client.client_app.ClientAppException: 
+Exception ClientAppException occurred. Message: 'FlowerClient' object has no attribute 'valloaders'
+[2024-05-04 19:19:25,178][flwr][INFO] - aggregate_evaluate: received 0 results and 5 failures
+[2024-05-04 19:19:25,178][flwr][INFO] - 
+[2024-05-04 19:19:25,178][flwr][INFO] - [ROUND 3]
+[2024-05-04 19:19:25,178][flwr][INFO] - configure_fit: strategy sampled 5 clients (out of 5)
+(raylet) [2024-05-04 19:19:33,961 C 9696 424] (raylet.exe) dlmalloc.cc:129:  Check failed: *handle != nullptr CreateFileMapping() failed. GetLastError() = 1455
+(raylet) *** StackTrace Information ***
+(raylet)
+(ClientAppActor pid=9092) Traceback (most recent call last):
+(ClientAppActor pid=9092)   File "<string>", line 1, in <module>
+(ClientAppActor pid=9092)   File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\multiprocessing\spawn.py", line 122, in spawn_main
+(ClientAppActor pid=9092)     exitcode = _main(fd, parent_sentinel)
+(ClientAppActor pid=9092)                ^^^^^^^^^^^^^^^^^^^^^^^^^^
+(ClientAppActor pid=9092)   File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\multiprocessing\spawn.py", line 132, in _main
+(ClientAppActor pid=9092)     self = reduction.pickle.load(from_parent)
+(ClientAppActor pid=9092)            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(ClientAppActor pid=9092) _pickle.UnpicklingError: pickle data was truncated
+(raylet) The node with node id: d71e04962f3ecaf0a97881c7fc8f055b320e683d29f7162a40f673c1 and address: 127.0.0.1 and node name: 127.0.0.1 has been marked dead because the detector has missed 
+too many heartbeats from it. This can happen when a     (1) raylet crashes unexpectedly (OOM, preempted node, etc.)
+        (2) raylet has lagging heartbeats due to slow network or busy workload.
+[2024-05-04 19:19:48,712 E 5832 10780] core_worker.cc:631: :info_message: Attempting to recover 1 lost objects by resubmitting their tasks. To disable object reconstruction, set @ray.remote(max_retries=0).
+Exception in thread Thread-27:
+Traceback (most recent call last):
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\threading.py", line 1045, in _bootstrap_inner
+    self.run()
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\threading.py", line 1401, in run
+    self.function(*self.args, **self.kwargs)
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\flwr\simulation\app.py", line 276, in update_resources
+    num_max_actors = pool_size_from_resources(client_resources)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\HP\anaconda3\envs\FedLearnCD\Lib\site-packages\flwr\simulation\ray_transport\ray_actor.py", line 126, in pool_size_from_resources
+    "The ActorPool is empty. The system (CPUs=%s, GPUs=%s) "
+UnboundLocalError: cannot access local variable 'num_cpus' where it is not associated with a value

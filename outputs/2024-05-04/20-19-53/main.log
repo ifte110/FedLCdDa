@@ -1,0 +1,25 @@
+[2024-05-04 20:19:55,686][flwr][INFO] - Starting Flower simulation, config: num_rounds=5, no round_timeout
+[2024-05-04 20:20:00,537][flwr][INFO] - Flower VCE: Ray initialized with resources: {'memory': 1080102912.0, 'node:127.0.0.1': 1.0, 'object_store_memory': 540051456.0, 'CPU': 8.0, 'node:__internal_head__': 1.0}
+[2024-05-04 20:20:00,552][flwr][INFO] - Optimize your simulation with Flower VCE: https://flower.ai/docs/framework/how-to-run-simulations.html
+[2024-05-04 20:20:00,552][flwr][INFO] - Flower VCE: Resources for each Virtual Client: {'num_cpus': 0.5, 'num_gpus': 0.0}
+[2024-05-04 20:20:00,593][flwr][INFO] - Flower VCE: Creating VirtualClientEngineActorPool with 16 actors
+[2024-05-04 20:20:00,593][flwr][INFO] - [INIT]
+[2024-05-04 20:20:00,593][flwr][INFO] - Requesting initial parameters from one random client
+[2024-05-04 20:20:21,789][flwr][INFO] - Received initial parameters from one random client
+[2024-05-04 20:20:21,789][flwr][INFO] - Evaluating initial global parameters
+[2024-05-04 20:20:26,163][flwr][INFO] - initial parameters (loss, other metrics): 182.01464915275574, {'accuracy': 0.1}
+[2024-05-04 20:20:26,163][flwr][INFO] - 
+[2024-05-04 20:20:26,163][flwr][INFO] - [ROUND 1]
+[2024-05-04 20:20:26,163][flwr][INFO] - configure_fit: strategy sampled 5 clients (out of 5)
+[2024-05-04 20:21:02,629][flwr][INFO] - aggregate_fit: received 5 results and 0 failures
+[2024-05-04 20:21:02,650][flwr][WARNING] - No fit_metrics_aggregation_fn provided
+[2024-05-04 20:21:07,848][flwr][INFO] - fit progress: (1, 137.96647930145264, {'accuracy': 0.3611}, 41.681958900007885)
+[2024-05-04 20:21:07,848][flwr][INFO] - configure_evaluate: strategy sampled 5 clients (out of 5)
+[2024-05-04 20:21:29,237][flwr][INFO] - aggregate_evaluate: received 5 results and 0 failures
+[2024-05-04 20:21:29,237][flwr][WARNING] - No evaluate_metrics_aggregation_fn provided
+[2024-05-04 20:21:29,237][flwr][INFO] - 
+[2024-05-04 20:21:29,237][flwr][INFO] - [ROUND 2]
+[2024-05-04 20:21:29,257][flwr][INFO] - configure_fit: strategy sampled 5 clients (out of 5)
+[2024-05-04 20:21:57,529][flwr][INFO] - aggregate_fit: received 5 results and 0 failures
+[2024-05-04 20:22:03,402][flwr][INFO] - fit progress: (2, 121.02983772754669, {'accuracy': 0.4424}, 97.23333250000724)
+[2024-05-04 20:22:03,402][flwr][INFO] - configure_evaluate: strategy sampled 5 clients (out of 5)
