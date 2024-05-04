@@ -42,10 +42,10 @@ def dataset_preprocessing(partition_size: int, batch_size: int, val_ratio: float
                                           torch.Generator().manual_seed(32))
 
         trainloaders.append(DataLoader(for_train, batch_size=batch_size, shuffle=True, 
-                                       num_workers=0))
+                                       num_workers=2))
 
         valloaders.append(DataLoader(for_val, batch_size=batch_size, shuffle=False, 
-                                     num_workers=0))
+                                     num_workers=2))
 
     testloaders = DataLoader(testset, batch_size=128) # need to change later
 
