@@ -6,11 +6,11 @@ from flwr.common import NDArrays, Scalar
 from model import Net, train, test
 
 class FlowerClient(fl.client.NumPyClient):
-    def __init__(self, trainloader, valloader, num_classes) -> None:
+    def __init__(self, trainloader, testloader, num_classes) -> None:
         super().__init__()
 
         self.trainloader = trainloader
-        self.valloader = valloader
+        self.testloader = testloader
 
         #pass in parameters for detection here
 
@@ -50,20 +50,20 @@ class FlowerClient(fl.client.NumPyClient):
         #check in this step if there are any concept drfit
         #if detected reset the model and dont send update to server
 
-        return self.get_parameters({}), len(self.trainloader), {}
+        return self.get_parameters(config={}), len(self.trainloader), {}
     
-    def evaluate(self, parameters:NDArrays,config: Dict[str , Scalar]):
+    def evaluate(self, parameters:NDArrays,config: Dict[str , str]):
         
         self.set_parameters(parameters)
 
-        loss, accuracy =  test(self.model, self.valloader, self.device)
+        loss, accuracy =  test(self.model, self.testloader, self.device)
 
-        return float(loss), len(self.valloader), {"accurcay":accuracy}
+        return float(loss), len(self.testloader), {"client_accurcay":accuracy}
     
 
-def get_client_fn (trainloaders, valloaders, num_classes):
+def get_client_fn (trainloaders, testloaders, num_classes):
     def client_fn(cid: str):
         return FlowerClient(trainloader=trainloaders[int(cid)],
-                            valloader=valloaders[int(cid)],
+                            testloaders=testloaders[int(cid)],
                             num_classes= num_classes,).to_client()
     return client_fn

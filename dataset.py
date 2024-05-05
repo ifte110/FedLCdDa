@@ -32,6 +32,7 @@ def dataset_preprocessing(partition_size: int, batch_size: int, val_ratio: float
 
     trainloaders =[]
     valloaders = []
+    testloaders = []
 
     for item_ in trainsets:
         trainsets_item_len = len(item_)
@@ -46,8 +47,12 @@ def dataset_preprocessing(partition_size: int, batch_size: int, val_ratio: float
 
         valloaders.append(DataLoader(for_val, batch_size=batch_size, shuffle=False, 
                                      num_workers=0))
+        
+    for item_ in testset:
 
-    testloaders = DataLoader(testset, batch_size=128) # need to change later
+        testloaders.append(DataLoader(item_, batch_size=batch_size, shuffle=False, 
+                                     num_workers=0))
+
 
     
     return trainloaders, valloaders, testloaders
