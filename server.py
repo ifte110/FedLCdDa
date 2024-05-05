@@ -5,6 +5,9 @@ from typing import OrderedDict
 
 def get_fit_config(config: DictConfig):
     def fit_config_fn(server_round: int):
+        #update and save shapley values here for each round
+        #implement drift detection here and adaptation to dift
+
         return{"lr":config.lr, "momentum":config.momentum, 
                "local_epochs":config.local_epochs}
     
@@ -25,7 +28,7 @@ def get_evaluate_fn(num_classes: int, testloader):
 
         loss, accuracy = test(model, testloader, device)
 
-        return loss, {"accuracy": accuracy}
+        return loss, {"server_accuracy": accuracy}
     
     return evaluate_fn
 

@@ -43,12 +43,13 @@ class FlowerClient(fl.client.NumPyClient):
         momentum = config["momentum"]
         epochs = config["local_epochs"]
 
+        #we can add an lr scheduler here to optimize learning rate
+
         optim = torch.optim.SGD(self.model.parameters(), lr=lr, momentum=momentum)
 
         train(self.model, self.trainloader,optim, epochs, self.device)
 
-        #check in this step if there are any concept drfit
-        #if detected reset the model and dont send update to server
+        # compute shapely values from here and send to server
 
         return self.get_parameters({}), len(self.trainloader), {}
     
@@ -58,7 +59,7 @@ class FlowerClient(fl.client.NumPyClient):
 
         loss, accuracy =  test(self.model, self.valloader, self.device)
 
-        return float(loss), len(self.valloader), {"accurcay":accuracy}
+        return float(loss), len(self.valloader), {"client_accurcay":accuracy}
     
 
 def get_client_fn (trainloaders, valloaders, num_classes):
