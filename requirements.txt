@@ -5,4 +5,3 @@ ray = 2.20.0
 torchvision = 0.18.0
 torchaudio = 2.3.0
 torch = 2.3.0
-cudatoolkit = 11.8.0

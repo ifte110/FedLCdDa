@@ -25,7 +25,7 @@ def get_evaluate_fn(num_classes: int, testloader):
 
         loss, accuracy = test(model, testloader, device)
 
-        return loss, {'accuracy': accuracy}
+        return loss, {"accuracy": accuracy}
     
     return evaluate_fn
 
